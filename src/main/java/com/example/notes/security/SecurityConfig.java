@@ -13,9 +13,15 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // /public/login
+    // /public/signup
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
+        http.authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/contact").permitAll() // Contact url ' ile biten isteği direk onayla diyoruz yani herhangi bir user password istememesini istiyoruz...
+                .requestMatchers("/public/**").permitAll() // burdada publicden sonra ne gelirse gelsin onayla izin falan isteme diyoruz.
+                .anyRequest().authenticated());
         //http.formLogin(withDefaults());
         http.sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
