@@ -20,4 +20,9 @@ public class HelloController {
     public String sayContact(){
         return "Contact";
     }
+
+    @GetMapping("/admin")
+    public String sayAdmin(){
+        return "Admin";
+    }
 }
