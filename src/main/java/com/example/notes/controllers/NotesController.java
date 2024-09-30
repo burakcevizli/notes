@@ -31,11 +31,14 @@ public class NotesController {
     }
 
     @PutMapping("/{noteId}")
-    public Note updateNote(@PathVariable long noteId, @RequestBody String content, @AuthenticationPrincipal UserDetails userDetails) {
+    public Note updateNote(@PathVariable long noteId, @RequestBody Map<String, String> requestBody, @AuthenticationPrincipal UserDetails userDetails) {
         String userName = userDetails.getUsername();
+        String content = requestBody.get("content"); // "content" anahtarını kullanarak içeriği al
+
         System.out.println("USER DETAILS : " + userName);
-        return noteService.updateNoteForUser(noteId, userName, content);
+        return noteService.updateNoteForUser(noteId, content, userName); // Kullanıcı adını geç
     }
+
 
     @DeleteMapping("/{noteId}")
     public void deleteNote(@PathVariable Long noteId, @AuthenticationPrincipal UserDetails userDetails) {
