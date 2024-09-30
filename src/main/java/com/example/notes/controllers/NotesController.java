@@ -34,7 +34,6 @@ public class NotesController {
     public Note updateNote(@PathVariable long noteId, @RequestBody Map<String, String> requestBody, @AuthenticationPrincipal UserDetails userDetails) {
         String userName = userDetails.getUsername();
         String content = requestBody.get("content"); // "content" anahtarını kullanarak içeriği al
-
         System.out.println("USER DETAILS : " + userName);
         return noteService.updateNoteForUser(noteId, content, userName); // Kullanıcı adını geç
     }
