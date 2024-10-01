@@ -12,6 +12,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import javax.sql.DataSource;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -44,10 +46,9 @@ public class SecurityConfig {
     Ayrıca sadece get requesti atarsak admin olarak girersek admin'in attıgı  postları görebiliyoruz.Aynısı user içinde geçerli
      */
     @Bean
-    public UserDetailsService userDetailsService() {
-
+    public UserDetailsService userDetailsService(DataSource datasource) {
         //InMemoryUserDetailsManager manager= new InMemoryUserDetailsManager(); // Inmemory yani sadece ramde saklayıp verileri tekrar kaybetmek için kulalndıgımız class.
-        JdbcUserDetailsManager manager= new JdbcUserDetailsManager();
+        JdbcUserDetailsManager manager= new JdbcUserDetailsManager(datasource);
         if(!manager.userExists("user1")){
             manager.createUser(User.withUsername("user1").password("{noop}password1").roles("USER").build()); // noop yazan yerde parolanın şifrelenmeden saklandıgını gösteriyor...
         }
