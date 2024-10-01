@@ -39,6 +39,8 @@ public class SecurityConfig {
 
     /*
     InMemoryUserDetailsManager: Kullanıcı bilgilerini bellekte tutan bir UserDetailsService implementasyonudur. Burada kullanıcılar veritabanı yerine bellekte saklanır.
+    Yani özetle aşağıdaki metot bize user1 yoksa db de olusturmadan memory' de yapıyor yani db ' ye kaydetmiyor ...
+    Ayrıca sadece get requesti atarsak admin olarak girersek admin'in attıgı  postları görebiliyoruz.Aynısı user içinde geçerli
      */
     @Bean
     public UserDetailsService userDetailsService() {
