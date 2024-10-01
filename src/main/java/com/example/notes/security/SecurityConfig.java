@@ -45,6 +45,8 @@ public class SecurityConfig {
      */
     @Bean
     public UserDetailsService userDetailsService() {
+
+        //InMemoryUserDetailsManager manager= new InMemoryUserDetailsManager(); // Inmemory yani sadece ramde saklayıp verileri tekrar kaybetmek için kulalndıgımız class.
         JdbcUserDetailsManager manager= new JdbcUserDetailsManager();
         if(!manager.userExists("user1")){
             manager.createUser(User.withUsername("user1").password("{noop}password1").roles("USER").build()); // noop yazan yerde parolanın şifrelenmeden saklandıgını gösteriyor...
