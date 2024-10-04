@@ -15,6 +15,20 @@ import java.util.*;
 @NoArgsConstructor
 @Data
 public class UserDetailsImpl implements UserDetails {
+
+    public static UserDetailsImpl build(User user) {
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
+
+        return new UserDetailsImpl(
+                user.getUserId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.isTwoFactorEnabled(),
+                List.of(authority)
+        );
+    }
+
     private static final long serialVersionUID = 1L;
 
     private Long id;
