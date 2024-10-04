@@ -45,6 +45,7 @@ public class SecurityConfig {
     Yani özetle aşağıdaki metot bize user1 yoksa db de olusturmadan memory' de yapıyor yani db ' ye kaydetmiyor ...
     Ayrıca sadece get requesti atarsak admin olarak girersek admin'in attıgı  postları görebiliyoruz.Aynısı user içinde geçerli
      */
+    /*
     @Bean
     public UserDetailsService userDetailsService(DataSource datasource) {
         //InMemoryUserDetailsManager manager= new InMemoryUserDetailsManager(); // Inmemory yani sadece ramde saklayıp verileri tekrar kaybetmek için kulalndıgımız class.
@@ -56,6 +57,6 @@ public class SecurityConfig {
             manager.createUser(User.withUsername("admin").password("{noop}adminPass").roles("ADMIN").build());
         }
         return manager;
-    }
+    }*/
 
 }
